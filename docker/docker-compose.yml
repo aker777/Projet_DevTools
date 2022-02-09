@@ -4,7 +4,7 @@ services:
   #PHP Service
   app:
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
     image: mesbouquins
     container_name: mesbouquins
@@ -15,7 +15,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     volumes:
-      - ./mesbouquins:/var/www
+      - ../src/./:/var/www/html
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - mesbouquins
@@ -30,7 +30,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./:/var/www
+      - ../src/.:/var/www/html
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - mesbouquins
