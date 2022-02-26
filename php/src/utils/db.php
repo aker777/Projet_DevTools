@@ -22,7 +22,7 @@ function getDataBaseConnection(): PDO {
     $user = getenv("USER");
     $password = getenv('PASS');
     try {
-        return $dbh = new PDO($dsn, $user, $password);
+        return $dbh = new PDO("mysql:host=db;port=3306;dbname=MYSQL_DATABASE", "MYSQL_USER", "MYSQL_PASSWORD");  ;
     } catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
@@ -43,18 +43,14 @@ function getDataBaseConnection(): PDO {
  * or
  * Null
  */
-function dataBaseInsert(PDO $connect, string $sql, array $params, string $tabName):?int {
-    flagation(2);
+function dataBaseInsert(PDO $connect, string $sql, array $params, string $tabName) {
     $statement = $connect->prepare($sql);
     if($statement !== false) {
-        flagation(3);
-        print_r($params);
         $success = $statement->execute($params);
         if($success) {
-            flagation(4);
-            $id  = $connect->lastInsertId();
+            $id  = $params[0]; //$connect->lastInsertId();
             header('Content-type: Application/json');
-            echo json_encode(execRequest("SELECT * FROM ".$tabName." WHERE ID =?", [$id]));
+            echo json_encode(execRequest("SELECT * FROM ".$tabName." WHERE isbn =?", [$id]));
             return $id;
         }else {
 
@@ -137,6 +133,38 @@ function execRequest(string $sql, array $params):?array {
              } else {
                  return $result;
              }
+        }
+    }
+    return NULL;
+}
+
+/* execRequest ()
+ *
+ * Genereric function execute sql request
+ * mostly use to get date from the data base
+ *
+ * arguments
+ * string who contains the sql request
+ * array contenains all the data for the data base
+ *
+ * return
+ * array contening all the result of the call
+ * or
+ * Null
+ */
+
+function execRequestBoolean(string $sql, array $params):?bool {
+    $db = getDataBaseConnection();
+    $statement = $db->prepare($sql);
+    if($statement !== false) {
+        $success = $statement->execute($params);
+        if($success) {
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if($result == false) {
+               return true; //n'a pas trouver d'occurence
+            } else {
+                return false; // occurence trouver
+            }
         }
     }
     return NULL;

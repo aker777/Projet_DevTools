@@ -55,6 +55,13 @@ function getUserStatus(int $id) {
     erro400NotConnectJsonMssg( "shield: this id does not exist in data base");
 }
 
+function getBookIsbn(string $isbn) {
+    $result = execRequestBoolean("SELECT isbn FROM Book WHERE isbn = ?",[$isbn]);
+    if(!$result) {
+        return erro401NotConnectJsonMssg( "shield: this isbn already exist in data base");
+    }
+}
+
 /*
  *
  *
@@ -146,11 +153,18 @@ function erro400NotConnectJsonMssg( string $errorMessage) {
     exit(1);
 }
 
+function erro401NotConnectJsonMssg( string $errorMessage) {
+    http_response_code(401);
+    header("Content-Type: application/json");
+    echo json_encode(["message"=> $errorMessage]);
+    exit(1);
+}
+
 function chkSessionStarted(){
     if(!isset($_SESSION) || session_status() !== PHP_SESSION_ACTIVE)
         erro400NotConnectJsonMssg("chkFnctns -> chkSessionStarted()\n error_session:unactive session");
 }
-function chkSession():boolean {
+function chkSession(){
     chkSessionStarted();
     if (!isset($_SESSION["status"]) || $_SESSION ['token'] || $_SESSION ['status']) {
         erro400NotConnectJsonMssg("chkFnctns -> chkSession()\n error_session: you must be connect");
