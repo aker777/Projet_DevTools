@@ -1,7 +1,6 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
 include("env.php");
+
 
 /* FILE EDITE BY:
  *                 - YANIS TAGRI
@@ -19,11 +18,11 @@ include("env.php");
  * this fonction get the connection with the data base
  */
 function getDataBaseConnection(): PDO {
-    $dsn = getenv('DSN');
-    $user = getenv('USER');
-    $password = getenv('PASSWORD');
+    $dsn = getenv('HOST');
+    $user = getenv("USER");
+    $password = getenv('PASS');
     try {
-       return $dbh = new PDO($dsn, $user, $password);
+        return $dbh = new PDO($dsn, $user, $password);
     } catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
