@@ -318,11 +318,11 @@ function buildsDeleteForMixPRymariKeyTab(string $tabNameInDb, array $id) :?strin
  */
 
 
-function dataBaseFindOne(string $sql, int $id) :?array {
+function dataBaseFindOne(string $sql, string $isbn) {
     $db = getDataBaseConnection();
     $statement = $db->prepare($sql);
     if($statement !== false) {
-        $success = $statement->execute([$id]);
+        $success = $statement->execute([$isbn]);
         if($success) {
             return $statement->fetch(PDO::FETCH_ASSOC);
         } else {
