@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "35dc966f-ceb3-46e5-9b37-04443c0d9763",
+		"name": "dockermybookstest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "saveOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"isbn\": \"8-8811-1113-7\",\n    \"title\": \"Le Pont du roi Saint-Louis\",\n    \"author\": \"Thornton Wilder\",\n    \"overview\": \"Le Pont du roi Saint-Louis est un roman historique de l'écrivain américain Thornton Wilder, publié en 1927.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/book/post/creat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"book",
+						"post",
+						"creat.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"isbn\": \"8-8811-1113-7\",\n    \"title\": \"rry potterre\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/book/post/update.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"book",
+						"post",
+						"update.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getgroupe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/book/get/list.php?limit=20&offset=0&title=r&author",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"book",
+						"get",
+						"list.php"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "title",
+							"value": "r"
+						},
+						{
+							"key": "author",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getoneBy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/book/get/book.php?isbn=2-7654-1005-7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"book",
+						"get",
+						"book.php"
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "2-7654-1005-7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteone",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/book/delete/delete.php?isbn=8-8864-1113-7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"book",
+						"delete",
+						"delete.php"
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "8-8864-1113-7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadfile",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
