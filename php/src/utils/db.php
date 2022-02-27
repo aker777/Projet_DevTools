@@ -236,9 +236,9 @@ function execRequestDelete(string $sql, array $params) :?bool {
  */
 
 function buildsUpdateAndattributs(string $tabNameInDb, array $attributsToset) :?string {
-    if(isset($attributsToset['id'])) {                          // must have an id
-        $id = intval($attributsToset['id']);
-        unset($attributsToset['id']);
+    if(isset($attributsToset['isbn'])) {                          // must have an id
+        $isbn = strval($attributsToset['isbn']);
+        unset($attributsToset['isbn']);
     } else {
         http_response_code(500);
         return null;
@@ -248,7 +248,7 @@ function buildsUpdateAndattributs(string $tabNameInDb, array $attributsToset) :?
         $str .= " " . $key . " = ?,";
     }
     $str = substr($str, 0, -1);
-    $str .= " WHERE id =" . $id;
+    $str .= " WHERE isbn =\"" . $isbn . "\"";
     return  $str;
 }
 
