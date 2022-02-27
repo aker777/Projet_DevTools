@@ -265,9 +265,9 @@ function buildsUpdateAndattributs(string $tabNameInDb, array $attributsToset) :?
  * Null
  */
 
-function buildsDelete(string $tabNameInDb, int $id) :?string {
-    if(is_int($id) ) {
-        $sql = "DELETE FROM ".$tabNameInDb." WHERE id = ?";
+function buildsDelete(string $tabNameInDb, string $isbn) :?string {
+    if(is_string($isbn) ) {
+        $sql = "DELETE FROM ".$tabNameInDb." WHERE isbn = ?";
     } else {
         http_response_code(500);
         return null;

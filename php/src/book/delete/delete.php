@@ -2,9 +2,9 @@
 include("./../../chckFnctns/chckFnctns.php");
 include("./../functions/functions.php");
 if(isset($_GET)) {
-    $idCheck = intval($_GET['id']);
-    $sql = buildsDelete("bill", $idCheck);
-    $params = array($idCheck);
+    $isbn = strval($_GET['isbn']);
+    $sql = buildsDelete("Book", $isbn);
+    $params = array($isbn);
     if (execRequestDelete($sql, $params)) {
         header('Content-type: Application/json');
         echo json_encode(["success" => 1]);
